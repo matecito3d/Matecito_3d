@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin — Matecito 3D</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" href="assets/logo-white.png" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="admin-shell">
+
+  <!-- ===== LOGIN ===== -->
+  <div class="admin-login" id="loginScreen">
+    <form id="loginForm" autocomplete="off">
+      <a href="index.html" class="brand" style="justify-content:center; margin-bottom:6px;">
+        <img src="assets/logo-white.png" alt="Matecito 3D" style="height:34px;" />
+      </a>
+      <h2 style="text-align:center; font-size:1.3rem;">Panel de administración</h2>
+      <div class="form-error" id="loginError">Usuario o contraseña incorrectos.</div>
+      <div class="field">
+        <label for="loginUser">Usuario</label>
+        <input type="text" id="loginUser" autocomplete="username" />
+      </div>
+      <div class="field">
+        <label for="loginPass">Contraseña</label>
+        <input type="password" id="loginPass" autocomplete="current-password" />
+      </div>
+      <button type="submit" class="btn btn-solid btn-block">Ingresar</button>
+      <a href="index.html" style="text-align:center; font-family:var(--mono); font-size:0.75rem; color:var(--grey-dim);">← Volver a la landing</a>
+    </form>
+  </div>
+
+  <!-- ===== DASHBOARD ===== -->
+  <div id="dashboard" style="display:none;">
+    <div class="admin-topbar">
+      <div class="wrap">
+        <a href="index.html" class="brand">
+          <img src="assets/logo-white.png" alt="Matecito 3D" style="height:26px;" />
+          <span style="font-size:1rem;">Admin</span>
+        </a>
+        <button class="btn" id="logoutBtn">Cerrar sesión</button>
+      </div>
+    </div>
+
+    <div class="admin-main">
+      <div class="wrap admin-layout">
+
+        <!-- Formulario alta / edición -->
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="formTitle">Nuevo producto</h2>
+            <span class="panel-head-sub" id="formSub">Completá los datos y guardá para publicarlo en la landing.</span>
+          </div>
+          <form id="productForm" class="product-form">
+            <input type="hidden" id="productId" />
+
+            <div class="form-group">
+              <div class="form-group-label"><span class="fg-num">01</span>Datos generales</div>
+              <div class="field">
+                <label for="pName">Nombre del producto</label>
+                <input type="text" id="pName" required />
+              </div>
+              <div class="form-row-2">
+                <div class="field">
+                  <label for="pCategory">Categoría</label>
+                  <select id="pCategory" required></select>
+                </div>
+                <div class="field">
+                  <label for="pPrice">Precio (ARS)</label>
+                  <input type="number" id="pPrice" min="0" step="1" placeholder="Ej: 15000" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="form-group-label"><span class="fg-num">02</span>Ficha del producto</div>
+              <div class="field">
+                <label for="pLink">Link a la ficha (index generado)</label>
+                <input type="text" id="pLink" placeholder="https://matecito3d.github.io/productos/mate-x/index.html" />
+                <p class="field-hint">El link de la carpeta que exportás desde el generador de sitios.</p>
+              </div>
+              <div class="field">
+                <label for="pDescription">Descripción corta</label>
+                <textarea id="pDescription" rows="3"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="form-group-label"><span class="fg-num">03</span>Imagen de portada</div>
+              <div class="field">
+                <label for="pThumb">Foto para la landing</label>
+                <input type="file" id="pThumb" accept="image/*" />
+                <p class="field-hint">Se usa como miniatura en las tarjetas y el menú de productos.</p>
+              </div>
+              <div class="thumb-preview" id="thumbPreview">Sin imagen</div>
+            </div>
+
+            <div class="form-group form-group-last">
+              <div class="form-group-label"><span class="fg-num">04</span>Visibilidad</div>
+              <label class="field-check">
+                <input type="checkbox" id="pNovedad" />
+                Marcar como novedad (aparece en la sección Novedades)
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-solid" style="flex:1;">Guardar producto</button>
+              <button type="button" class="btn" id="cancelEditBtn" style="display:none;">Cancelar</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Listado -->
+        <div class="list-column">
+          <div class="list-head">
+            <h2>Productos cargados</h2>
+            <span class="list-count"><span id="totalCount">0</span> en total</span>
+          </div>
+          <div class="admin-table-wrap" id="productList"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
